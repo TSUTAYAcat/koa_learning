@@ -13,7 +13,6 @@ const main = (ctx=>{
     }else{
         ctx.response.body='BACK'
     }
-    
 })
 
 app.use(main);
