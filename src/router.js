@@ -25,9 +25,12 @@ const login = async ctx => {
         throw (error)
     } finally {
         if (result && result.length > 0) {
+            console.log(result)
             ctx.response.body = {
                 data: {
-                    loginSuccess: true
+                    loginSuccess: true,
+                    username: result[0].username,
+                    password: result[0].password
                 }
             }
         } else {
