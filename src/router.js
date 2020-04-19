@@ -43,27 +43,31 @@ const login = async ctx => {
 
 // 用户注册接口：/user/register/register
 const register = new Router();//创建个人用户路由对象
-register.get('/joinUs', async ctx => {
-    const { pathname, query } = url.parse(ctx.request.url, true);
-    let result = null
-    try {
-        result = await mysql.joinUs(query)
-    } catch (error) {
-        console.log(error)
-        throw (error)
-    } finally {
-        if (!result || result.failed) {
-            ctx.response.body = {
-                failed: true,
-                data: null
-            }
-        } else {
-            ctx.response.body = {
-                failed: false,
-                data: {
-                    joinUs: true
+register.post('/joinUs', async ctx => {
+    const postData = ctx.request.body;
+    if (postData.username && postData.password) {
+        try {
+            result = await mysql.joinUs(postData)
+        } catch (error) {
+            console.log(error)
+            throw (error)
+        } finally {
+            if (!result || result.failed) {
+                ctx.response.body = {
+                    successs: false,
+                    message: '请输入用户名或密码',
+                }
+            } else {
+                ctx.response.body = {
+                    successs: true,
+                    message: '注册成功',
                 }
             }
+        }
+    } else {
+        ctx.response.body = {
+            successs: false,
+            message: '请输入用户名或密码',
         }
     }
 })
