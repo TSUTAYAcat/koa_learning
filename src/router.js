@@ -54,19 +54,19 @@ register.post('/joinUs', async ctx => {
         } finally {
             if (!result || result.failed) {
                 ctx.response.body = {
-                    successs: false,
+                    success: false,
                     message: '请输入用户名或密码',
                 }
             } else {
                 ctx.response.body = {
-                    successs: true,
+                    success: true,
                     message: '注册成功',
                 }
             }
         }
     } else {
         ctx.response.body = {
-            successs: false,
+            success: false,
             message: '请输入用户名或密码',
         }
     }
