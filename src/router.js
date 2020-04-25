@@ -12,6 +12,7 @@ const userRouter = new Router();
 const index = async ctx => {
     ctx.response.type = 'html'
     ctx.response.body = fs.createReadStream('./static/html/future.html')
+    // ctx.response.body = fs.createReadStream('/public/build/index.html')
 }
 // 用户登录接口：/user/login
 const login = async ctx => {
