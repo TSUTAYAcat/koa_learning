@@ -1,21 +1,12 @@
 // mysql/index.js
 
-var mysql = require('mysql');
-var config = require('../../config.js')
+const pool = require('./pool'); 
 
-var pool = mysql.createPool({
-  host: config.database.HOST,
-  user: config.database.USERNAME,
-  password: config.database.PASSWORD,
-  database: config.database.DATABASE
-});
-
-
-class Mysql {
+class UpdateUser {
   constructor() {
   }
-  // 登录
-  login(param) {
+   // 登录
+   login(param) {
     const { username, password } = param
     let sql = `select * from user where username = '${username}' and password = '${password}'`
     return new Promise((resolve, reject) => {
@@ -28,6 +19,7 @@ class Mysql {
     })
 
   }
+  
   // 注册
   joinUs(param) {
     const { username, password } = param
@@ -48,4 +40,4 @@ class Mysql {
   }
 }
 
-module.exports = new Mysql()
+module.exports = new UpdateUser()
