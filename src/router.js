@@ -14,8 +14,8 @@ const categoryRouter = new Router();
 // 首页：/
 const index = async ctx => {
     ctx.response.type = 'html'
-    ctx.response.body = fs.createReadStream('./static/html/future.html')
-    // ctx.response.body = fs.createReadStream('/public/build/index.html')
+    ctx.response.body = fs.createReadStream(__dirname +'/static/html/future.html')
+
 }
 // 用户登录接口：/user/login
 const login = async ctx => {
@@ -81,7 +81,7 @@ register.post('/joinUs', async ctx => {
 const getCategoryList = async ctx => {
     console.log(1)
     const { pathname, query } = url.parse(ctx.request.url, true)
-    console.log(query,pathname)
+    console.log(query, pathname)
     let result = null
     try {
         result = await UpdateCategory.getCategoryList(query)
@@ -92,14 +92,14 @@ const getCategoryList = async ctx => {
         if (result && result.length > 0) {
             console.log(result)
             ctx.response.body = {
-                    success: true,
-                    data:result
-              
+                success: true,
+                data: result
+
             }
         } else {
             ctx.response.body = {
-                    loginSuccess: false
-               
+                loginSuccess: false
+
             }
         }
     }
@@ -112,5 +112,5 @@ categoryRouter.get('/list', getCategoryList);
 // 根路由管理,并导出
 router.use('/api/category', categoryRouter.routes());
 router.use('/user', userRouter.routes());
-router.get('/', index);
+router.get('/loveu', index);
 module.exports = router
