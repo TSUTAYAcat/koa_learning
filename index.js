@@ -26,14 +26,14 @@ app.use(router.routes())
 // 前端路由，这是在后端路有没有规定的所以找不到，所以我们自定义中间件，当找不到执行下面代码，请求index.html
 app.use(async ctx => {
   console.log(ctx.originalUrl)
-  if(ctx.originalUrl === '/src/static/html/lee.jpg'){
+  if (ctx.originalUrl.indexOf('/src/static/html/' !== -1)) {
     ctx.response.type = 'html'
-    ctx.response.body = fs.createReadStream(__dirname + '/src/static/html/lee.jpg')
-  }else{
+    ctx.response.body = fs.createReadStream(__dirname + ctx.originalUrl)
+  } else {
     ctx.response.type = 'html'
     ctx.response.body = fs.createReadStream(__dirname + '/public/build/index.html')
   }
- 
+
 })
 app.listen(3000)
 
