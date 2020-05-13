@@ -31,17 +31,13 @@ const login = async ctx => {
         if (result && result.length > 0) {
             console.log(result)
             ctx.response.body = {
-                data: {
-                    loginSuccess: true,
-                    username: result[0].username,
-                    password: result[0].password
-                }
+                success: true,
+                username: result[0].username,
+                password: result[0].password
             }
         } else {
             ctx.response.body = {
-                data: {
-                    loginSuccess: false
-                }
+                success: false
             }
         }
 
@@ -98,7 +94,7 @@ const getCategoryList = async ctx => {
             }
         } else {
             ctx.response.body = {
-                loginSuccess: false
+                success: false
 
             }
         }
